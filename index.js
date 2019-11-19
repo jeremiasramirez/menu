@@ -1,33 +1,89 @@
 (function(){
 
     document.addEventListener("contextmenu", (e)=>{
-
-        /*preventing eventing*/
+        /*preventing block*/
         e.preventDefault();
 
-        let containerMenu = document.createElement("ul");
-            containerMenu.textContent = "Menu  " +  "  X";
-            containerMenu.setAttribute("id", "containerMenu");
-            containerMenu.setAttribute("class", "containerMenu");
+        //if click and element container Exist removed and create other
+        if(document.getElementById("containerMenu")){
+            document.getElementById("containerMenu").remove();
+        }
 
-        let itemMenu = null,
-            /* text item < menu */
-            textItemMenu = ["Open", "Edit", "Delete", "Copy", "Paste", "Close"];
 
-        /*specify 6 item */
-        for(let i=0; i<6; i++){
+        if(!document.getElementById("containerMenu")){
 
-            //creating item of menu
-            itemMenu = document.createElement("li");
+
+        /*
+         ***********   functions   **************
+        */
+
+        function createItem(itemMenu, containerMenu){
+
+            /*specify 6 item to create*/
+            for(let i=0; i<6; i++){
+
+                //creating item of menu
+                itemMenu = document.createElement("li");
                 itemMenu.setAttribute("id", "item-" + i);
                 itemMenu.setAttribute("class", "item-" + i);
                 itemMenu.textContent = textItemMenu[i];
 
                 /*adding item to menu*/
-            containerMenu.appendChild(itemMenu);
+                containerMenu.appendChild(itemMenu);
+
+            }
 
         }
 
+
+
+
+        function placeMenu(menu, order){
+
+            menu.style.top = ( e.clientY - order )  + "px";
+            menu.style.left = ( e.clientX + order ) + "px";
+        }
+
+
+
+
+        function removeMenu(menu){
+
+            if(menu){
+
+                menu.addEventListener("click", ()=>{
+                    menu.remove();
+                }, false);
+
+            }
+
+        }
+
+
+
+
+        function containerMenuFunc(containerMenu){
+
+            containerMenu.textContent = "Menu  " +  "  X";
+            containerMenu.setAttribute("id", "containerMenu");
+            containerMenu.setAttribute("class", "containerMenu");
+
+        }
+
+
+
+
+        /*********** End functions  ***********/
+
+
+        let containerMenu = document.createElement("ul");
+
+        containerMenuFunc(containerMenu);
+
+        let itemMenu = null,
+            textItemMenu = ["Open", "Edit", "Delete", "Copy", "Paste", "Close"];
+
+        createItem(itemMenu, containerMenu);
 
 
         /*adding menu to body*/
@@ -39,19 +95,15 @@
             order = 15;
 
 
-
-
         /*place of menu*/
-        menu.style.top = e.clientY - order + "px";
-        menu.style.left = e.clientX + order + "px";
+        placeMenu(menu, order);
 
 
+        /*if menu is clicked then removed*/
+        removeMenu(menu);
 
-        /*if menu is clicked when removed*/
-        menu.addEventListener("click", ()=>{
-            menu.remove();
-        }, false);
 
+        }
 
 
     }, false);

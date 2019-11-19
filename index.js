@@ -1,6 +1,7 @@
 (function(){
 
-    document.addEventListener("click", (e)=>{
+    document.addEventListener("contextmenu", (e)=>{
+        e.preventDefault();
         let menuBack = document.getElementById("containerMenu");
         if(menuBack){
             menuBack.remove();

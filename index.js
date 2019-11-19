@@ -12,7 +12,7 @@
 
 
         containerMenu.setAttribute("id", "containerMenu");
-        containerMenu.textContent = "Menu";
+        containerMenu.textContent = "Menu  " +  "  X";
         containerMenu.setAttribute("class", "containerMenu");
 
         let itemMenu = null;
@@ -33,11 +33,18 @@
 
         document.body.appendChild(containerMenu);
 
+
+
         let menu = document.getElementById("containerMenu");
         let order = 15;
 
+        menu.addEventListener("click", ()=>{
+            menu.remove();
+        }, false);
+
         menu.style.top = e.clientY - order + "px";
         menu.style.left = e.clientX + order + "px";
+
 
 
     }, false);

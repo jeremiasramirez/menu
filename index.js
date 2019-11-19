@@ -1,59 +1,60 @@
 (function(){
 
     document.addEventListener("contextmenu", (e)=>{
-        e.preventDefault();
-        let menuBack = document.getElementById("containerMenu");
-        if(menuBack){
-            menuBack.remove();
 
-        }
+        /*preventing eventing*/
+        e.preventDefault();
 
         let containerMenu = document.createElement("ul");
+            containerMenu.textContent = "Menu  " +  "  X";
+            containerMenu.setAttribute("id", "containerMenu");
+            containerMenu.setAttribute("class", "containerMenu");
 
+        let itemMenu = null,
+            /* text item < menu */
+            textItemMenu = ["Open", "Edit", "Delete", "Copy", "Paste", "Close"];
 
-        containerMenu.setAttribute("id", "containerMenu");
-        containerMenu.textContent = "Menu  " +  "  X";
-        containerMenu.setAttribute("class", "containerMenu");
+        /*specify 6 item */
+        for(let i=0; i<6; i++){
 
-        let itemMenu = null;
-        let textItemMenu = ["Open", "Edit", "Delete", "Copy", "Close"];
-
-        for(let i=0; i<5; i++){
-
+            //creating item of menu
             itemMenu = document.createElement("li");
-            itemMenu.setAttribute("id", "item");
-            itemMenu.setAttribute("class", "item");
-            itemMenu.textContent = textItemMenu[i];
+                itemMenu.setAttribute("id", "item-" + i);
+                itemMenu.setAttribute("class", "item-" + i);
+                itemMenu.textContent = textItemMenu[i];
+
+                /*adding item to menu*/
             containerMenu.appendChild(itemMenu);
 
         }
 
 
 
-
+        /*adding menu to body*/
         document.body.appendChild(containerMenu);
 
 
+        /*  get menu id*/
+        let menu = document.getElementById("containerMenu"),
+            order = 15;
 
-        let menu = document.getElementById("containerMenu");
-        let order = 15;
 
-        menu.addEventListener("click", ()=>{
-            menu.remove();
-        }, false);
 
+
+        /*place of menu*/
         menu.style.top = e.clientY - order + "px";
         menu.style.left = e.clientX + order + "px";
 
 
 
+        /*if menu is clicked when removed*/
+        menu.addEventListener("click", ()=>{
+            menu.remove();
+        }, false);
+
+
+
     }, false);
-
-
-
-
-
-
 
 
 
